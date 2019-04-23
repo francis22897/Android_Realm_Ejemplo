@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RealmExercise</string>
+    <string name="hint_namePlace">Nombre del lugar</string>
+    <string name="hint_descriptionPlace">Descripción</string>
+</resources>
