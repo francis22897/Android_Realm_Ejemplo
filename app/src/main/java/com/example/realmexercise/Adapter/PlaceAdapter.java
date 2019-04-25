@@ -18,12 +18,14 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolderPl
     public class ViewHolderPlace extends RecyclerView.ViewHolder{
         TextView placeName;
         TextView placeDescription;
+        TextView placeCountry;
 
         public ViewHolderPlace(View itemView){
             super(itemView);
 
             placeName = itemView.findViewById(R.id.tv_itemName);
             placeDescription = itemView.findViewById(R.id.tv_itemDescription);
+            placeCountry = itemView.findViewById(R.id.tv_itemCountry);
         }
     }
 
@@ -50,6 +52,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolderPl
     public void onBindViewHolder(@NonNull ViewHolderPlace viewHolderPlace, int i) {
         viewHolderPlace.placeName.setText(listPlaces.get(i).getName());
         viewHolderPlace.placeDescription.setText(listPlaces.get(i).getDescription());
+        viewHolderPlace.placeCountry.setText(listPlaces.get(i).getCountry().getName());
 
     }
 

@@ -2,6 +2,7 @@ package com.example.realmexercise.Realm;
 
 import android.util.Log;
 
+import com.example.realmexercise.Object.Country;
 import com.example.realmexercise.Object.Place;
 
 import io.realm.Realm;
@@ -25,11 +26,12 @@ public class RealmRepository {
         }
     }
 
-    public static void updatePlace(Place place, String name, String description){
+    public static void updatePlace(Place place, String name, String description, Country country){
         try{
             realm.beginTransaction();
             place.setName(name);
             place.setDescription(description);
+            place.setCountry(realm.copyToRealm(country));
             realm.commitTransaction();
         }catch(Exception ex){
             Log.e("Update", ex.getMessage());

@@ -19,7 +19,7 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" >
 
     <EditText
         android:id="@+id/edit_description"
@@ -27,4 +27,17 @@
         android:layout_height="wrap_content"
         android:hint="@string/hint_descriptionPlace"
         android:layout_margin="10dp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_country_title"
+        android:layout_margin="10dp"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_placeCountry"/>
 </LinearLayout>

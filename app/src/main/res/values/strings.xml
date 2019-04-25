@@ -3,4 +3,5 @@
     <string name="hint_namePlace">Nombre del lugar</string>
     <string name="hint_descriptionPlace">Descripción</string>
     <string name="place_remove_confirm_text">¿Estás seguro de eliminar el lugar?</string>
+    <string name="tv_country_title">País</string>
 </resources>

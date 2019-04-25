@@ -9,13 +9,15 @@ public class Place extends RealmObject {
     private int id;
     private String name;
     private String description;
+    private Country country;
 
     public Place(){}
 
-    public Place(String name, String description) {
+    public Place(String name, String description, Country country) {
         this.id = RealmAplication.placeId.incrementAndGet();
         this.name = name;
         this.description = description;
+        this.country = country;
     }
 
     public int getId() {
@@ -40,5 +42,13 @@ public class Place extends RealmObject {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 }
