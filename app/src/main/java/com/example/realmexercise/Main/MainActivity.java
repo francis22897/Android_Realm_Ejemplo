@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.realmexercise.Adapter.PlaceAdapter;
+import com.example.realmexercise.Dialog.DialogRepository;
 import com.example.realmexercise.Object.Place;
 import com.example.realmexercise.R;
 import com.example.realmexercise.Realm.RealmRepository;
@@ -81,14 +82,13 @@ public class MainActivity extends AppCompatActivity implements RealmChangeListen
     }
 
     private void insert(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        final View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_place, null);
-        builder.setView(view);
+
+        View view = DialogRepository.init(MainActivity.this, R.layout.dialog_place, "Agregar un nuevo lugar");
 
         final EditText edtName = view.findViewById(R.id.edit_namePlace);
         final EditText edtDescription = view.findViewById(R.id.edit_description);
-        builder.setMessage("Agregar un nuevo lugar");
-        builder.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
+
+        DialogRepository.addPositiveButton("Guardar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String name = edtName.getText().toString().trim();
@@ -102,32 +102,27 @@ public class MainActivity extends AppCompatActivity implements RealmChangeListen
             }
         });
 
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        DialogRepository.addNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
         });
 
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        DialogRepository.showDialog();
     }
 
     private void update(final Place place){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        final View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_place, null);
-        builder.setView(view);
+        View view = DialogRepository.init(MainActivity.this, R.layout.dialog_place, "Editar");
 
         final EditText edtName = view.findViewById(R.id.edit_namePlace);
         final EditText edtDescription = view.findViewById(R.id.edit_description);
-        builder.setMessage("Editar");
 
         edtName.setText(place.getName());
         edtDescription.setText(place.getDescription());
-
         edtName.setSelection(edtName.getText().length());
 
-        builder.setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
+        DialogRepository.addPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String name = edtName.getText().toString().trim();
@@ -140,38 +135,35 @@ public class MainActivity extends AppCompatActivity implements RealmChangeListen
             }
         });
 
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        DialogRepository.addNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
             }
         });
 
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        DialogRepository.showDialog();
 
     }
 
     private void delete(final Place place){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        final View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_delete_confirm, null);
-        builder.setView(view);
+        View view = DialogRepository.init(MainActivity.this, R.layout.dialog_delete_confirm, "Eliminar");
 
-        builder.setMessage("Elimina este lugar");
-        builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+        DialogRepository.addPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 RealmRepository.deletePlace(place);
+
             }
         });
 
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        DialogRepository.addNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
         });
 
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        DialogRepository.showDialog();
     }
 }
