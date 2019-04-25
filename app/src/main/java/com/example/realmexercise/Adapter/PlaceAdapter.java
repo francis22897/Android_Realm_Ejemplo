@@ -1,4 +1,4 @@
-package com.example.realmexercise;
+package com.example.realmexercise.Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.realmexercise.Object.Place;
+import com.example.realmexercise.R;
 
 import java.util.List;
 
@@ -45,7 +48,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolderPl
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderPlace viewHolderPlace, int i) {
-        viewHolderPlace.placeName.setText(listPlaces.get(i).getNombre());
+        viewHolderPlace.placeName.setText(listPlaces.get(i).getName());
         viewHolderPlace.placeDescription.setText(listPlaces.get(i).getDescription());
 
     }

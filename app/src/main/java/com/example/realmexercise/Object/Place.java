@@ -1,18 +1,20 @@
-package com.example.realmexercise;
+package com.example.realmexercise.Object;
+
+import com.example.realmexercise.Realm.RealmAplication;
 
 import io.realm.RealmObject;
 
 public class Place extends RealmObject {
 
     private int id;
-    private String nombre;
+    private String name;
     private String description;
 
     public Place(){}
 
-    public Place(int id, String nombre, String description) {
-        this.id = id;
-        this.nombre = nombre;
+    public Place(String name, String description) {
+        this.id = RealmAplication.placeId.incrementAndGet();
+        this.name = name;
         this.description = description;
     }
 
@@ -24,12 +26,12 @@ public class Place extends RealmObject {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String nombre) {
+        this.name = nombre;
     }
 
     public String getDescription() {

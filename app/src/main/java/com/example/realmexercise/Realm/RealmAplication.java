@@ -1,6 +1,8 @@
-package com.example.realmexercise;
+package com.example.realmexercise.Realm;
 
 import android.app.Application;
+
+import com.example.realmexercise.Object.Place;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -23,7 +25,10 @@ public class RealmAplication extends Application {
     }
 
     private void setUpRealConfig(){
-        RealmConfiguration config = new RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build();
+        RealmConfiguration config = new RealmConfiguration
+                .Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
         Realm.setDefaultConfiguration(config);
     }
 
