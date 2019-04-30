@@ -1,5 +1,6 @@
 package com.example.realmexercise.Main;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements RealmChangeListen
     private RealmResults<Place> listPlaces;
     private RecyclerView rv;
     private PlaceAdapter adapter;
+    private RealmResults<Country> listCountries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,13 @@ public class MainActivity extends AppCompatActivity implements RealmChangeListen
     private void init(){
         fabNewPlace = findViewById(R.id.fab);
 
+
+        if(RealmRepository.getAllCountries().size() == 0) {
+            Log.e("Relleno", "Hola");
+            CountryRepository.addCountriesToBD();
+        }
+
+        listCountries = RealmRepository.getAllCountries();
         listPlaces = RealmRepository.getAllPlaces();
         listPlaces.addChangeListener(this);
         rv = findViewById(R.id.rv);
@@ -132,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements RealmChangeListen
         edtDescription.setText(place.getDescription());
         spinner.setSelection(getPositionAtCountries(place.getCountry()));
         edtName.setSelection(edtName.getText().length());
+        edtDescription.setSelection(edtDescription.getText().length());
 
         DialogRepository.addPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
             @Override
@@ -140,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements RealmChangeListen
                 String description = edtDescription.getText().toString().trim();
                 Country country = (Country) spinner.getSelectedItem();
                 if(name.length() > 0){
-                    RealmRepository.updatePlace(place, name, description, new Country(country.getId(), country.getName()));
+                    RealmRepository.updatePlace(place, name, description, new Country(country.getName()));
                 }else{
                     Toast.makeText(getApplicationContext(), "Rellene todos los cambios", Toast.LENGTH_LONG).show();
                 }
@@ -180,19 +190,17 @@ public class MainActivity extends AppCompatActivity implements RealmChangeListen
     }
 
     private void fillSpinner(Spinner spinner){
-        CountryRepository countryRepository = new CountryRepository();
         ArrayAdapter sAdapter = new ArrayAdapter<Country>(this,
-                android.R.layout.simple_spinner_dropdown_item, countryRepository.getRepository());
+                android.R.layout.simple_spinner_dropdown_item, listCountries);
         spinner.setAdapter(sAdapter);
     }
 
     private int getPositionAtCountries(Country country){
-        CountryRepository countryRepository = new CountryRepository();
-        List<Country> countries = countryRepository.getRepository();
+
         int position = 0;
 
-        for(int i = 0; i < countries.size(); i++){
-            if(countries.get(i).getId() == country.getId()){
+        for(int i = 0; i < listCountries.size(); i++){
+            if(listCountries.get(i).getId() == country.getId()){
                 position = i;
                 break;
             }

@@ -2,6 +2,7 @@ package com.example.realmexercise.Realm;
 
 import android.app.Application;
 
+import com.example.realmexercise.Object.Country;
 import com.example.realmexercise.Object.Place;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,6 +14,7 @@ import io.realm.RealmResults;
 
 public class RealmAplication extends Application {
     public static AtomicInteger placeId = new AtomicInteger();
+    public static AtomicInteger countryId = new AtomicInteger();
 
     @Override
     public void onCreate() {
@@ -21,6 +23,7 @@ public class RealmAplication extends Application {
         setUpRealConfig();
         Realm realm = Realm.getDefaultInstance();
         placeId = getByTabla(realm, Place.class);
+        countryId = getByTabla(realm, Country.class);
         realm.close();
     }
 

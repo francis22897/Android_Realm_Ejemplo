@@ -1,5 +1,7 @@
 package com.example.realmexercise.Object;
 
+import com.example.realmexercise.Realm.RealmAplication;
+
 import io.realm.RealmObject;
 
 public class Country extends RealmObject {
@@ -8,17 +10,14 @@ public class Country extends RealmObject {
 
     public Country(){}
 
-    public Country(int id, String name) {
-        this.id = id;
+    public Country(String name) {
+        this.id = RealmAplication.countryId.incrementAndGet();
         this.name = name;
     }
 
+
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -28,8 +27,6 @@ public class Country extends RealmObject {
     public void setName(String name) {
         this.name = name;
     }
-
-
 
     @Override
     public String toString() {

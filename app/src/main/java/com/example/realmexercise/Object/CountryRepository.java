@@ -1,32 +1,13 @@
 package com.example.realmexercise.Object;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.realmexercise.Realm.RealmRepository;
 
 public class CountryRepository {
 
-    List<Country> countries;
-
-    public CountryRepository() {
-        countries = new ArrayList<>();
-        setRepository();
+    public static void addCountriesToBD() {
+        RealmRepository.insertCountry(new Country("España"));
+        RealmRepository.insertCountry(new Country("Portugal"));
+        RealmRepository.insertCountry(new Country("Italia"));
     }
 
-    private void setRepository(){
-        countries.add(new Country(1, "España"));
-        countries.add(new Country(2, "Portugal"));
-        countries.add(new Country(3, "Italia"));
-    }
-
-    public List<Country> getRepository(){
-        return countries;
-    }
-
-    public void addCountry(Country country){
-        countries.add(country);
-    }
-
-    public void removeCountry(Country country){
-        countries.remove(country);
-    }
 }
