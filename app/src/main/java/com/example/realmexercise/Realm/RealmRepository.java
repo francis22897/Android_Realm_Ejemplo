@@ -13,6 +13,7 @@ import io.realm.RealmResults;
 public class RealmRepository {
 
     private static Realm realm = Realm.getDefaultInstance();
+    private static MainActivity main = new MainActivity();
 
     public static RealmResults<Place> getAllPlaces(){
         return realm.where(Place.class).findAll();
@@ -28,7 +29,7 @@ public class RealmRepository {
             realm.copyToRealm(place);
             realm.commitTransaction();
         }catch(Exception ex){
-            Log.e("Insert", ex.getMessage());
+            main.showToast("No se pudo realizar la inserción del lugar");
         }
     }
 
@@ -38,7 +39,7 @@ public class RealmRepository {
             realm.copyToRealm(country);
             realm.commitTransaction();
         }catch(Exception ex){
-            Log.e("Insert", ex.getMessage());
+            main.showToast("No se pudo realizar la inserción del país");
         }
     }
 
@@ -50,7 +51,7 @@ public class RealmRepository {
             place.setCountry(realm.where(Country.class).equalTo("name", country.getName()).findFirst());
             realm.commitTransaction();
         }catch(Exception ex){
-            Log.e("Update", ex.getMessage());
+            main.showToast("No se pudo realizar la actualización del lugar");
         }
     }
 
@@ -61,7 +62,7 @@ public class RealmRepository {
             place.deleteFromRealm();
             realm.commitTransaction();
         }catch (Exception ex){
-            Log.e("Delete", ex.getMessage());
+            main.showToast("No se pudo eliminar el lugar");
         }
     }
 }

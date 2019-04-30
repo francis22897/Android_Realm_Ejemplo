@@ -208,4 +208,8 @@ public class MainActivity extends AppCompatActivity implements RealmChangeListen
 
         return position;
     }
+
+    public void showToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
 }
